@@ -1,0 +1,58 @@
+<div class="row">
+    <div class="col-lg-12 col-xl-12">
+        <div class="card shadow mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h6 class="text-primary font-weight-bold m-0">Reports > Transaction Reports</h6>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Year</label>
+                    </div>
+                    <div class="col-md-3">
+                        <kendo-dropdownlist [data]="listItems">
+                        </kendo-dropdownlist>
+                    </div>
+                    <div class="col-md-3">
+                        <label>Month</label>
+                    </div>
+                    <div class="col-md-3">
+                        <kendo-dropdownlist [data]="listItems">
+                        </kendo-dropdownlist>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Waste Type</label>
+                    </div>
+                    <div class="col-md-3">
+                        <kendo-dropdownlist [data]="listItems">
+                        </kendo-dropdownlist>
+                    </div>
+                    <div class="col-md-3">
+                        <label>Distributor</label>
+                    </div>
+                    <div class="col-md-3">
+                        <kendo-dropdownlist [data]="listItems">
+                        </kendo-dropdownlist>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 5px;">
+                    <div class="col-md-12">
+                        <kendo-grid [data]="gridData" [height]="250">
+                            <kendo-grid-column field="Year" title="Year"></kendo-grid-column>
+                            <kendo-grid-column field="Month" title="Month"></kendo-grid-column>
+                            <kendo-grid-column field="WasteType" title="Waste Type"></kendo-grid-column>
+                            <kendo-grid-column field="Distributor" title="Distributor"></kendo-grid-column>
+                        </kendo-grid>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 5px;">
+                    <div class="col-md-12">
+                        <button kendoButton [primary]="true" class="float-right">Run Report</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

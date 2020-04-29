@@ -1,0 +1,45 @@
+<div class="bgpic">
+
+  <div class="center">
+    <div class="example-large-box mat-elevation-z4">
+      <div class="container" style="margin: 2vh;">
+        <div class="row">
+          <div class="col-md-12" style="text-align: center">
+            <h1>E - Waste Logo</h1>
+            <!-- <img class="logo-menu" src="../../assets/img/logo.png"> -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12" style="align-items: center">
+
+            <form action="/action_page.php" (ngSubmit)="onSubmit(loginForm.value)" [formGroup]="loginForm">
+              <div class="row">
+                <input type="text" name="username" placeholder="Username" id="userName" formControlName="userName"
+                  required>
+                <input type="password" name="password" placeholder="Password" id="password" formControlName="password"
+                  required>
+                <input type="submit" value="Login">
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <p style="font-size:0.7em;">Forgot your password? <a class="link" href="#/">Reset Now</a>
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12" style="color: #f44336">
+            <p *ngIf="isInvalid" style="font-size:0.72em; text-align: center;">Invalid User Name or Password
+            </p>
+            <p *ngIf="!isInvalid" class="text-right" style="font-size:0.72em;"> &nbsp;
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

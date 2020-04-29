@@ -1,0 +1,85 @@
+<div class="row">
+    <div class="col-lg-6 col-xl-6">
+        <div class="card shadow mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h6 class="text-primary font-weight-bold m-0">New Requests</h6>
+            </div>
+            <div class="card-body">
+                <kendo-grid [selectable]="{checkboxOnly: false, mode: 'single'}" kendoGridSelectBy="cName"
+                    (selectedKeysChange)="onSelectChange($event)" [data]="gridData" [height]="354">
+                    <kendo-grid-column field="cName" title="Name"></kendo-grid-column>
+                    <kendo-grid-column field="cWaste" title="Waste"></kendo-grid-column>
+                    <kendo-grid-command-column title="">
+                        <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                            <button kendoButton [primary]="true">Accept
+                            </button>
+                            <button kendoButton>Reject</button>
+                        </ng-template>
+                    </kendo-grid-command-column>
+                </kendo-grid>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-xl-6">
+        <div class="card shadow mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h6 class="text-primary font-weight-bold m-0">Request Details</h6>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4 class="small font-weight-bold">Contributor Name :</h4>
+                    </div>
+                    <div class="col-md-6">
+                        <h4 class="small">{{selected.cName}}</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4 class="small font-weight-bold">Contributor Address :</h4>
+                    </div>
+                    <div class="col-md-6">
+                        <h4 class="small">{{selected.cAddress}}</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4 class="small font-weight-bold">Contributing Waste :</h4>
+                    </div>
+                    <div class="col-md-6">
+                        <h4 class="small">{{selected.cWaste}}</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4 class="small font-weight-bold">Contributing Qty :</h4>
+                    </div>
+                    <div class="col-md-6">
+                        <h4 class="small">{{selected.cQty}}</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        &nbsp;
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        &nbsp;
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <div class="img-placeholder">
+                            <a class="handhover" #styleImageLink [title]="'imageTitle'">
+                                <img class="style-img" sizes="md" id="styleImage" [src]="" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

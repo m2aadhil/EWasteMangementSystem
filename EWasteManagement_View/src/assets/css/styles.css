@@ -1,0 +1,22 @@
+
+.img-placeholder {
+    height: 213px;
+    width: 160px;
+    background: url(../img/picture.svg) no-repeat center;
+    background-size: 50% 50%;
+    background-color: #eeeeee;
+    border: 1px dashed #368ac0;
+  }
+  
+  .img-placeholder img {
+    visibility: hidden;
+    width: 157px;
+    height: 211px;
+  }
+  .img-placeholder img[src] {
+    visibility: visible;
+  }
+
+  /* .footer-2{
+      background-color: #37474F !important;
+  } */
