@@ -1,9 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-
-//controllers
-import * as HomeController from "./controllers/home.controller";
-import * as DatabaseController from "./controllers/database.controller";
+import { enviorenment } from './config';
+import router from "./rotues"
 
 const app = express();
 
@@ -17,23 +15,17 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.use('/api', router);
+
 //configs
-require('custom-env').env('dev')
-app.set("port", process.env.PORT);
+app.set("port", enviorenment.PORT);
 
 //application routes
 app.get('/', (req, res) => {
     res.send('app works..!');
 });
-app.get("/home", HomeController.getInit);
-app.get("/train/:type/:location/:epochs/:learningr", HomeController.train);
-app.get("/testdb", DatabaseController.testDBConnection);
-app.get("/getstatevalues", DatabaseController.getAllStateValues);
-app.get("/getcountyvalues/:state", DatabaseController.getAllCountyValues);
-app.get("/getpriceforloc/:address/:lat/:lng/:year/:citycode", HomeController.getPriceforLocation);
-app.get("/getcities/:county", HomeController.getCities);
 
-//HomeController.trainAll();
-//DatabaseController.testCSV();
+//app.get("/home", HomeController.getInit);
+
 
 export default app;

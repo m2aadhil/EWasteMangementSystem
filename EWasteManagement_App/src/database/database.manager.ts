@@ -1,22 +1,19 @@
 import { MongoClient } from 'mongodb';
+import { enviorenment } from '../config';
 
 export class DBManager {
-
-    readonly databaseUri: string = "mongodb://team_minecraft:Admin123@ds046667.mlab.com:46667/land_evaluation";
     private client: MongoClient;
     private db;
 
-
     constructor() {
-        this.client = new MongoClient(this.databaseUri, { useUnifiedTopology: true });
+        this.client = new MongoClient(enviorenment.Mongo.url, { useUnifiedTopology: true });
     }
 
-    connect = async (dbName: string) => {
+    connect = async () => {
         try {
             // Connect to the MongoDB
             await this.client.connect();
-            this.db = await this.client.db(dbName);
-            console.log(this.db);
+            this.db = await this.client.db(enviorenment.Mongo.dbName);
         } catch (err) {
             console.error(err);
         }

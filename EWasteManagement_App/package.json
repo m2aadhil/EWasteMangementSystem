@@ -1,0 +1,42 @@
+{
+  "name": "e_waste_management_system",
+  "version": "1.0.0",
+  "description": "E Waste Management System",
+  "main": "dist/server.js",
+  "scripts": {
+    "start": "tsc && node dist/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ErrorCode101/EWasteMangementSystem.git"
+  },
+  "keywords": [
+    "e waste",
+    "waste",
+    "management",
+    "system"
+  ],
+  "author": "Team Minecraft",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ErrorCode101/EWasteMangementSystem/issues"
+  },
+  "homepage": "https://github.com/ErrorCode101/EWasteMangementSystem#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "bcrypt": "^4.0.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.5.5",
+    "node-fetch": "^2.6.0",
+    "request-promise": "^4.2.5"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.2",
+    "argparse": "^1.0.10",
+    "@types/node": "^13.7.1",
+    "tslint": "^6.0.0",
+    "typescript": "^3.7.5"
+  }
+}
