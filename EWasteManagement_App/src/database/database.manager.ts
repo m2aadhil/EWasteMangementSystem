@@ -1,5 +1,6 @@
 import { MongoClient } from 'mongodb';
 import { enviorenment } from '../config';
+var ObjectId = require('mongodb').ObjectID;
 
 export class DBManager {
     private client: MongoClient;
@@ -65,7 +66,7 @@ export class DBManager {
 
     getAllDocuments = async (collection: string) => {
         try {
-            return await this.db.collection(collection).find().toArray();
+            return await this.db.collection(collection).find({ IsActive: true }).toArray();
         } catch (err) {
             console.error(err);
         }
@@ -74,7 +75,40 @@ export class DBManager {
 
     getDocuments = async (collection: string, document: any) => {
         try {
+            document['IsActive'] = true;
             return await this.db.collection(collection).find(document).toArray();
+        } catch (err) {
+            console.error(err);
+        }
+        return null;
+    }
+
+    getDocumentsById = async (collection: string, id: string) => {
+        try {
+            const o_id = new ObjectId(id);
+            return await this.db.collection(collection).find({ '_id': o_id }).toArray();
+        } catch (err) {
+            console.error(err);
+        }
+        return null;
+    }
+
+    updateDocumentsById = async (collection: string, id: string, newDoc: any) => {
+        try {
+            const o_id = new ObjectId(id);
+            await this.db.collection(collection).updateOne({ '_id': o_id }, { $set: newDoc });
+
+        } catch (err) {
+            console.error(err);
+            return false;
+        }
+        return true;
+    }
+
+    getDocumentsFiltered = async (collection: string, document: any, fields: any) => {
+        try {
+            document['IsActive'] = true;
+            return await this.db.collection(collection).find(document).project(fields).toArray();
         } catch (err) {
             console.error(err);
         }

@@ -18,7 +18,7 @@ app.use(function (req, res, next) {
 app.use('/api', router);
 
 //configs
-app.set("port", enviorenment.PORT);
+app.set("port", Number(process.env.PORT) || enviorenment.PORT);
 
 //application routes
 app.get('/', (req, res) => {
