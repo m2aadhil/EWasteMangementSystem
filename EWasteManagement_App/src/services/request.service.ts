@@ -57,7 +57,7 @@ export class RequestService {
         } finally {
             //await this.dbManager.closeConnection();
         }
-        return requests;
+        return { result: requests };
     }
 
     getRequestsByDistributor = async (loginName: string) => {
@@ -80,7 +80,7 @@ export class RequestService {
         } finally {
             //await this.dbManager.closeConnection();
         }
-        return requests;
+        return { result: requests };
     }
 
     updateRequest = async (loginName: string, id: string, request: WasteRequest) => {
@@ -107,7 +107,7 @@ export class RequestService {
         } finally {
             //await this.dbManager.closeConnection();
         }
-        return response;
+        return { result: response };
     }
 
     getRequestsById = async (id: string) => {
@@ -128,7 +128,7 @@ export class RequestService {
         } finally {
             //await this.dbManager.closeConnection();
         }
-        return requests;
+        return { result: requests };
     }
 
     getRequestsByCompany = async (loginName: string) => {
@@ -150,7 +150,7 @@ export class RequestService {
         } finally {
             //await this.dbManager.closeConnection();
         }
-        return requests;
+        return { result: requests };
     }
 
 }

@@ -122,7 +122,7 @@ export class UserService {
         } finally {
             //await this.dbManager.closeConnection();
         }
-        return response;
+        return { result: response };
     }
     //db.comapny_rating
     resetPassword = async (type: string, loginName: string) => {
