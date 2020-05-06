@@ -11,4 +11,5 @@ export class CompanyUser extends BaseModel {
     AddressLine2: string;
     City: string;
     Password: string;
+    Rating: number;
 }

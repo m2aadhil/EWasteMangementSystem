@@ -12,6 +12,6 @@ export class WasteRequest extends BaseModel {
     Raisedby: string;
     Acceptedby: string;
     Assignedto: string;
-    longtitude: string;
-    latitude: string;
+    Longitude: string;
+    Latitude: string;
 }

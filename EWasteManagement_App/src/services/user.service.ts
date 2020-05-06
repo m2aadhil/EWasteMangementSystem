@@ -110,12 +110,34 @@ export class UserService {
                 await this.dbManager.connect();
                 response = await this.dbManager.getAllDocuments(collection);
                 if (response && response.length > 0) {
-                    response.forEach(e => {
-                        delete e['Password'];
-                        delete e['IsActive'];
-                        delete e['LoginName'];
-                    });
+                    let ratings;
+                    if (type == 'company') {
+                        ratings = await this.dbManager.getAllDocuments('db.comapny_rating');
+                        response.forEach(e => {
+                            let rating: number = 0;
+                            let companyRatings = ratings.filter(i => i.Company_id == e._id);
+                            if (companyRatings && companyRatings.length > 0) {
+                                companyRatings.forEach(i => {
+                                    rating += i.Rating;
+                                });
+                                rating = rating > 0 ? rating / companyRatings.length : 0;
+                            }
+                            delete e['Password'];
+                            delete e['IsActive'];
+                            delete e['LoginName'];
+                            e['Rating'] = rating;
+                        });
+
+                    } else {
+                        response.forEach(e => {
+                            delete e['Password'];
+                            delete e['IsActive'];
+                            delete e['LoginName'];
+
+                        });
+                    }
                 }
+
             }
         } catch (err) {
             console.error(err);
