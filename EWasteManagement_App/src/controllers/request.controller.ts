@@ -23,9 +23,13 @@ export const getRequestsByDistributor = async (req: Request, res: Response) => {
 }
 
 export const getRequestsByCompany = async (req: Request, res: Response) => {
-    res.json(await requestService.getRequestsByCompany(req.params.login));
+    res.json(await requestService.getRequestsByCompany(req.params.login, Number(req.params.status)));
 }
 
 export const getRequestsById = async (req: Request, res: Response) => {
     res.json(await requestService.getRequestsById(req.params.id));
+}
+
+export const assignToDistributor = async (req: Request, res: Response) => {
+    res.json(await requestService.assigenToDistributor(req.params.login, req.params.id, req.params.assignto));
 }

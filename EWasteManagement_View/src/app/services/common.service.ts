@@ -1,21 +1,22 @@
-import { Injectable } from "@angular/core";
-import { BehaviorSubject } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { UserModel } from '../models/user.model';
 
 @Injectable()
 export class CommonService {
 
-    private coreServiceUrl: string = "https://qriomatrix-kafe.herokuapp.com/";
+    private user: UserModel;
 
-
-    // private userSource = new BehaviorSubject(new UserDTO());
-    // currentUser = this.userSource.asObservable();
-
-    public GetCoreServiceUrl(): string {
-        return this.coreServiceUrl;
+    constructor() {
+        this.user = new UserModel();
+        this.user.LoginName = 'admin_m2aadhil';
     }
 
-    // public setUser(user : UserDTO): void{
-    //     this.userSource.next(user);
-    // }
+    setUser = (user: UserModel) => {
+        this.user = user;
+    }
+
+    getUser = () => {
+        return this.user;
+    }
 
 }

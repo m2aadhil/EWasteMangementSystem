@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="card shadow-lg o-hidden border-0 my-5">
+        <div class="card-body p-0">
+            <div class="row">
+                <div class="col-lg-5 d-none d-lg-flex">
+                    <div class="flex-grow-1 bg-register-image"
+                        style="background-image: url(&quot;assets/img/dogs/image2.jpeg&quot;);"></div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h4 class="text-dark mb-4">Create an Account!</h4>
+                        </div>
+                        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate class="user">
+                            <div class="form-group"><input class="form-control form-control-user" type="text"
+                                    [(ngModel)]="user.CompanyName" #companyName="ngModel" id="companyName"
+                                    aria-describedby="companyName" placeholder="Company Name" name="companyName"
+                                    required></div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user"
+                                        [(ngModel)]="user.FirstName" #first_name="ngModel" type="text" id="first_name"
+                                        placeholder="First Name" name="first_name" required>
+                                </div>
+                                <div class="col-sm-6"><input class="form-control form-control-user" type="text"
+                                        [(ngModel)]="user.LastName" #last_name="ngModel" id="last_name"
+                                        placeholder="Last Name" name="last_name" required></div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user"
+                                        type="email" id="email" aria-describedby="emailHelp" [(ngModel)]="user.Email"
+                                        #email="ngModel" placeholder="Email Address" name="email" required>
+                                </div>
+                                <div class="col-sm-6"><input class="form-control form-control-user" type="text"
+                                        [(ngModel)]="user.TelephoneNo" #contactNo="ngModel" id="contactNo"
+                                        placeholder="Telephone No" name="contactNo" required></div>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control form-control-user" [(ngModel)]="user.BusinessRegNo"
+                                    #businessRegno="ngModel" type="text" id="businessRegno"
+                                    placeholder="Business Reg. No" name="businessRegno" required>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user"
+                                        type="text" [(ngModel)]="user.LoginName" #loginName="ngModel" id="loginName"
+                                        placeholder="Login Name" name="loginName" required>
+                                </div>
+                                <div class="col-sm-6"><input class="form-control form-control-user"
+                                        [(ngModel)]="user.Password" #confirmPassword="ngModel" type="password"
+                                        id="password" placeholder="Password" name="password" required>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-block text-white btn-user" type="submit">
+                                <div *ngIf="!isLoading">Register
+                                    Account </div>
+                                <div *ngIf="isLoading" class="spinner"
+                                    style="margin-top: 0 !important; margin-bottom: 0 !important;">
+                                    <div class="bounce1"></div>
+                                    <div class="bounce2"></div>
+                                    <div class="bounce3"></div>
+                                </div>
+                            </button>
+                            <hr>
+                        </form>
+                        <div class="text-center"><a class="small" href="forgot-password.html">Forgot Password?</a></div>
+                        <div class="text-center"><a class="small" [routerLink]="''">Already have an account?
+                                Login!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+<script src="assets/js/script.min.js"></script>

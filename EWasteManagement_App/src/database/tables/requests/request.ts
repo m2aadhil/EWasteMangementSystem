@@ -7,7 +7,7 @@ export class WasteRequest extends BaseModel {
     WasteType: string;
     Description: string;
     Quantity: number;
-    Comapny_id: string;
+    Company_id: string;
     Images: string;
     Raisedby: string;
     Acceptedby: string;

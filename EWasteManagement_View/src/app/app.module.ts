@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { HttpService } from './services/https.service';
-import { CommonService } from './services/common.service';
 import {
   MatInputModule
 } from '@angular/material';
@@ -18,6 +17,13 @@ import { GridModule } from '@progress/kendo-angular-grid';
 import { ReportsComponent } from './reports/reports.component';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
+import { RequestHistoryComponent } from './request.history/request.history.component';
+import { CommonService } from './services/common.service';
+import { DialogsModule } from '@progress/kendo-angular-dialog';
+import { RegisterComponent } from './register/register.component';
+import { NotificationModule } from '@progress/kendo-angular-notification';
+
+
 
 
 
@@ -30,6 +36,8 @@ import { ButtonsModule } from '@progress/kendo-angular-buttons';
     LoginComponent,
     RequestsComponent,
     ReportsComponent,
+    RequestHistoryComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,9 +51,11 @@ import { ButtonsModule } from '@progress/kendo-angular-buttons';
     MatInputModule,
     GridModule,
     DropDownsModule,
-    ButtonsModule
+    ButtonsModule,
+    DialogsModule,
+    NotificationModule
   ],
-  providers: [HttpService, CommonService, AuthenticationService],
+  providers: [HttpService, AuthenticationService, CommonService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -37,6 +37,14 @@ export const getAllUsers = async (req: Request, res: Response) => {
     }
 }
 
+export const getUsers = async (req: Request, res: Response) => {
+    if (req.params.type) {
+        res.json(await userService.getUser(req.params.type, req.params.login));
+    } else {
+        res.json("Incorrect User Type");
+    }
+}
+
 export const resetPassword = async (req: Request, res: Response) => {
     res.json(await userService.resetPassword(req.params.type, req.params.login));
 }

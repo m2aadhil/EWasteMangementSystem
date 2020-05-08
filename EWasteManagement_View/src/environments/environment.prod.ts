@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  coreServiceURL: 'https://e-waste-management-system.el.r.appspot.com/'
 };

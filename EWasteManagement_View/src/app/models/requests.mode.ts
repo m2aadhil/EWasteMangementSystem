@@ -1,8 +1,10 @@
 export class RequestModel {
-    cName: string;
-    cAddress: string;
-    cContact: string;
-    cWaste: string;
-    cQty: number;
-    cDate: Date;
+    Assignedto: string;
+    Contributor: any;
+    Description: string;
+    Images: string;
+    Quantity: number;
+    Status: string;
+    WasteType: string;
+    _id: string;
 }

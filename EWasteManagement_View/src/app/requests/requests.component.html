@@ -4,16 +4,18 @@
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h6 class="text-primary font-weight-bold m-0">New Requests</h6>
             </div>
-            <div class="card-body">
-                <kendo-grid [selectable]="{checkboxOnly: false, mode: 'single'}" kendoGridSelectBy="cName"
-                    (selectedKeysChange)="onSelectChange($event)" [data]="gridData" [height]="354">
-                    <kendo-grid-column field="cName" title="Name"></kendo-grid-column>
-                    <kendo-grid-column field="cWaste" title="Waste"></kendo-grid-column>
-                    <kendo-grid-command-column title="">
+            <div class="card-body" style="height:60vh !important;">
+                <kendo-grid [loading]="isGridLoading" [selectable]="{checkboxOnly: false, mode: 'single'}"
+                    kendoGridSelectBy="_id" (selectedKeysChange)="onSelectChange($event)" [data]="gridData"
+                    [height]="354">
+                    <kendo-grid-column width="120" field="WasteType" title="Waste Type"></kendo-grid-column>
+                    <kendo-grid-column field="Description" title="Description"></kendo-grid-column>
+                    <kendo-grid-column width="50" field="Quantity" title="Qty"></kendo-grid-column>
+                    <kendo-grid-command-column width="160" title="">
                         <ng-template kendoGridCellTemplate let-dataItem="dataItem">
-                            <button kendoButton [primary]="true">Accept
+                            <button kendoButton [primary]="true" (click)="onAccept(dataItem._id)">Accept
                             </button>
-                            <button kendoButton>Reject</button>
+                            <button kendoButton (click)="onReject(dataItem._id)">Reject</button>
                         </ng-template>
                     </kendo-grid-command-column>
                 </kendo-grid>
@@ -23,63 +25,139 @@
     <div class="col-lg-6 col-xl-6">
         <div class="card shadow mb-4">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h6 class="text-primary font-weight-bold m-0">Request Details</h6>
+                <h6 class="text-primary font-weight-bold m-0">Contributor Details</h6>
             </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h4 class="small font-weight-bold">Contributor Name :</h4>
-                    </div>
-                    <div class="col-md-6">
-                        <h4 class="small">{{selected.cName}}</h4>
-                    </div>
+            <div class="card-body" style="height:60vh !important;">
+                <div *ngIf="isContLoading" class="spinner">
+                    <div class="bounce1"></div>
+                    <div class="bounce2"></div>
+                    <div class="bounce3"></div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <h4 class="small font-weight-bold">Contributor Address :</h4>
-                    </div>
-                    <div class="col-md-6">
-                        <h4 class="small">{{selected.cAddress}}</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <h4 class="small font-weight-bold">Contributing Waste :</h4>
-                    </div>
-                    <div class="col-md-6">
-                        <h4 class="small">{{selected.cWaste}}</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <h4 class="small font-weight-bold">Contributing Qty :</h4>
-                    </div>
-                    <div class="col-md-6">
-                        <h4 class="small">{{selected.cQty}}</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        &nbsp;
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        &nbsp;
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3"></div>
-                    <div class="col-md-6">
-                        <div class="img-placeholder">
-                            <a class="handhover" #styleImageLink [title]="'imageTitle'">
-                                <img class="style-img" sizes="md" id="styleImage" [src]="" />
-                            </a>
+                <div *ngIf="!isContLoading">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="small font-weight-bold">Full Name :</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="small">{{contName}}</h4>
                         </div>
                     </div>
-                    <div class="col-md-3"></div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="small font-weight-bold">Address :</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="small">{{contAddress}}</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="small font-weight-bold">Email :</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="small">{{contEmail}}</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="small font-weight-bold">Contact No :</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="small">{{contTel}}</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <div class="img-placeholder">
+                                <a class="handhover" #styleImageLink [title]="'imageTitle'">
+                                    <img class="style-img" sizes="md" id="styleImage" [src]="imageUrl" />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+<kendo-dialog title="Assign to Contributor" *ngIf="isAssign" (close)="isAssign = false" [minWidth]="250" [width]="320"
+    [height]="350">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <kendo-combobox style="width: 100%;" [data]="listDistributors" [filterable]="true"
+                    (filterChange)="filterChange($event)" (valueChange)="valueChange($event)" [allowCustom]="false">
+                </kendo-combobox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                &nbsp;
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h5 class="small font-weight-bold">First Name :</h5>
+            </div>
+            <div class="col-md-6">
+                <h5 class="small">
+                    {{selectedDistributor.FirstName}}
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h5 class="small font-weight-bold">Last Name :</h5>
+            </div>
+            <div class="col-md-6">
+                <h5 class="small">
+                    {{selectedDistributor.LastName}}
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h5 class="small font-weight-bold">Contact No :</h5>
+            </div>
+            <div class="col-md-6">
+                <h5 class="small">
+                    {{selectedDistributor.MobileNo}}
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h5 class="small font-weight-bold">Email :</h5>
+            </div>
+            <div class="col-md-6">
+                <h5 class="small"> {{selectedDistributor.Email}}</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h5 class="small font-weight-bold">Address :</h5>
+            </div>
+            <div class="col-md-6">
+                <h5 class="small">{{selectedDistributor.AddressLine1}} &nbsp;
+                    {{selectedDistributor.AddressLine2}} &nbsp;
+                    {{selectedDistributor.City}}
+                </h5>
+            </div>
+        </div>
+
+    </div>
+    <kendo-dialog-actions>
+        <button kendoButton (click)="isAssign = false">Cancel</button>
+        <button kendoButton (click)="assignDistributor(selectedDistributor.LoginName)" primary="true">Assign</button>
+    </kendo-dialog-actions>
+</kendo-dialog>
+<div *ngIf="isLoading" id="preloader">
+    <div id="loader"></div>
 </div>

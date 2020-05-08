@@ -112,14 +112,21 @@ export class RequestService {
 
     getRequestsById = async (id: string) => {
         let requests: WasteRequest[] = [];
+        let userService: UserService = new UserService();
         try {
             console.log(id)
             await this.dbManager.connect();
             requests = await this.dbManager.getDocumentsById('db.requests', id);
             console.log(request);
             if (requests && requests.length > 0) {
+                let createdUser = await userService.getUser('contributor', requests[0].Raisedby);
+                let company = await this.dbManager.getDocumentsById('db.recycle_company', requests[0].Company_id);
+                console.log(company);
                 requests.forEach(i => {
                     i["Status"] = RequestStatus.find(t => t.id == i.RequestStatus).status;
+                    i["ContributorMobileNo"] = createdUser ? createdUser.MobileNo : null;
+                    i["CompanyName"] = company && company.length > 0 ? company.CompanyName : null;
+                    i["Contributor"] = createdUser ? createdUser : null;
                 })
             }
 
@@ -131,13 +138,16 @@ export class RequestService {
         return { result: requests };
     }
 
-    getRequestsByCompany = async (loginName: string) => {
+    getRequestsByCompany = async (loginName: string, status: number) => {
         let requests: WasteRequest[] = [];
         try {
             let user = await this.userService.getUser('company', loginName);
             if (user) {
                 await this.dbManager.connect();
-                requests = await this.dbManager.getDocuments('db.requests', { Company_id: user._id });
+                console.log(user._id);
+                requests = await this.dbManager.getDocumentsFiltered('db.requests', { Company_id: user._id.toString(), RequestStatus: status },
+                    { _id: 1, RequestStatus: 1, WasteType: 1, Description: 1, Quantity: 1, Comapny_id: 1, });
+                console.log(requests);
                 if (requests && requests.length > 0) {
                     requests.forEach(i => {
                         i["Status"] = RequestStatus.find(t => t.id == i.RequestStatus).status;
@@ -151,6 +161,31 @@ export class RequestService {
             //await this.dbManager.closeConnection();
         }
         return { result: requests };
+    }
+
+    assigenToDistributor = async (assignedBy: string, requestId: string, assignedTo: string) => {
+        let response = { Success: false, ResponseMessage: "" }
+        try {
+            await this.dbManager.connect();
+            let requests = await this.dbManager.getDocumentsById('db.requests', requestId);
+            if (requests && requests.length > 0) {
+                let assignRequest: WasteRequest = new WasteRequest();
+                assignRequest.ModifiedBy = assignedBy;
+                assignRequest.ModifiedDate = new Date();
+                assignRequest.Assignedto = assignedTo;
+                assignRequest.RequestStatus = 3;
+                await this.dbManager.updateDocumentsById('db.requests', requestId, assignRequest);
+                response.Success = true;
+                response.ResponseMessage = "Assign Successfull";
+
+            } else {
+                response.ResponseMessage = "Request not found...";
+            }
+        } catch (err) {
+            console.error(err);
+            response.ResponseMessage = "Assigning Failed...";
+        }
+        return response;
     }
 
 }

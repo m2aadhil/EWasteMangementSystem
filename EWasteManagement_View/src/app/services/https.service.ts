@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpHeaders, HttpClient, HttpParams } from "@angular/common/http";
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class HttpService {
@@ -17,8 +18,8 @@ export class HttpService {
         };
 
 
-        return this.http.get(dataUrl
-            , httpOptions)
+        return this.http.get(environment.coreServiceURL + dataUrl
+        )
             .toPromise()
             .then((response: JSON) => response)
             .catch(this.handleError);
@@ -33,8 +34,8 @@ export class HttpService {
             })
         };
 
-        return this.http.post(dataUrl
-            , body, httpOptions)
+        return this.http.post(environment.coreServiceURL + dataUrl
+            , body)
             .toPromise()
             .then((response: JSON) => response)
             .catch(this.handleError);
@@ -47,7 +48,7 @@ export class HttpService {
         };
 
 
-        return this.http.get(dataUrl
+        return this.http.get(environment.coreServiceURL + dataUrl
             , httpOptions)
             .toPromise()
             .then((response: JSON) => response)
@@ -62,7 +63,7 @@ export class HttpService {
             })
         };
 
-        return this.http.post(dataUrl
+        return this.http.post(environment.coreServiceURL + dataUrl
             , body, httpOptions)
             .toPromise()
             .then((response: JSON) => response)
@@ -71,7 +72,7 @@ export class HttpService {
 
     postFormData(dataUrl: string, body: any): Promise<any> {
 
-        return this.http.post(dataUrl
+        return this.http.post(environment.coreServiceURL + dataUrl
             , body)
             .toPromise()
             .then((response: JSON) => response)
@@ -85,7 +86,7 @@ export class HttpService {
             })
         };
 
-        return this.http.delete(dataUrl
+        return this.http.delete(environment.coreServiceURL + dataUrl
             , httpOptions)
             .toPromise()
             .catch(this.handleError);

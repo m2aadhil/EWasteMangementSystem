@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import { CommonService } from './common.service';
 
 @Injectable()
 export class AuthenticationService {
 
-  constructor(public http: HttpClient, private commonService: CommonService) { }
+  constructor(public http: HttpClient) { }
 
   public login(userData: any) {
 

@@ -8,20 +8,20 @@
             <hr class="sidebar-divider my-0">
             <ul class="nav navbar-nav text-light" id="accordionSidebar">
                 <li class="nav-item" role="presentation"><a class="nav-link"
-                        [ngClass]="{'active': activeTab == 'Requests'}" [routerLink]=""
-                        (click)="activeTab = 'Requests'"><i class="fas fa-retweet"></i><span>Requests</span></a>
+                        [ngClass]="{'active': activeTab == 'Requests'}" (click)="activeTab = 'Requests'"><i
+                            class="fas fa-retweet"></i><span>Requests</span></a>
                 </li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="profile.html"><i
+                <li class="nav-item" role="presentation"><a class="nav-link"><i
                             class="fas fa-history"></i><span>History</span></a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="table.html"><i
+                <li class="nav-item" role="presentation"><a class="nav-link"><i
                             class="fas fas fa-clipboard-list"></i><span>Dashboard</span></a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="login.html"><i
+                <li class="nav-item" role="presentation"><a class="nav-link"><i
                             class="far fa-user-circle"></i><span>Distributors</span></a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="register.html"><i
+                <li class="nav-item" role="presentation"><a class="nav-link"><i
                             class="fas fa-gift"></i><span>Rewards</span></a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link"
-                        [ngClass]="{'active': activeTab == 'Reports'}" [routerLink]=""
-                        (click)="activeTab = 'Reports'"><i class="fas fa-file-medical-alt"></i><span>Reports</span></a>
+                        [ngClass]="{'active': activeTab == 'Reports'}" (click)="activeTab = 'Reports'"><i
+                            class="fas fa-file-medical-alt"></i><span>Reports</span></a>
                 </li>
             </ul>
             <div class="text-center d-none d-md-inline"></div>
@@ -44,7 +44,7 @@
                         <li class="nav-item dropdown no-arrow" role="presentation">
                             <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
                                     data-toggle="dropdown" aria-expanded="false" [routerLink]=""><span
-                                        class="d-none d-lg-inline mr-2 text-gray-600 small">Admin</span><img
+                                        class="d-none d-lg-inline mr-2 text-gray-600 small">{{user.LoginName}}</span><img
                                         class="border rounded-circle img-profile"
                                         src="assets/img/avatars/avatar1.jpeg"></a>
                                 <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu"><a

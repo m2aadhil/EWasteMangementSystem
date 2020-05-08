@@ -34,6 +34,8 @@ export class UserService {
                 } else {
                     response.Status = "duplicate";
                 }
+            } else {
+                response.Status = "invalid user name or user type";
             }
 
         } catch (err) {
@@ -124,7 +126,6 @@ export class UserService {
                             }
                             delete e['Password'];
                             delete e['IsActive'];
-                            delete e['LoginName'];
                             e['Rating'] = rating;
                         });
 
@@ -132,7 +133,6 @@ export class UserService {
                         response.forEach(e => {
                             delete e['Password'];
                             delete e['IsActive'];
-                            delete e['LoginName'];
 
                         });
                     }

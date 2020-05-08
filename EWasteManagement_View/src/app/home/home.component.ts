@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../services/https.service';
-import { CommonService } from '../services/common.service';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { CommonService } from '../services/common.service';
+import { UserModel } from '../models/user.model';
 
 
 @Component({
@@ -13,13 +14,15 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   activeTab: string = 'Requests';
+  user: UserModel;
   ngOnInit() {
+
   }
 
 
-  constructor(private httpService: HttpService, private _router: Router,
+  constructor(private httpService: HttpService, private _router: Router, private commonService: CommonService
   ) {
-
+    this.user = this.commonService.getUser();
 
   }
 
