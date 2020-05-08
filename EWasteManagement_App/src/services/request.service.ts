@@ -117,15 +117,14 @@ export class RequestService {
             console.log(id)
             await this.dbManager.connect();
             requests = await this.dbManager.getDocumentsById('db.requests', id);
-            console.log(request);
             if (requests && requests.length > 0) {
                 let createdUser = await userService.getUser('contributor', requests[0].Raisedby);
-                let company = await this.dbManager.getDocumentsById('db.recycle_company', requests[0].Company_id);
+                let company = await this.dbManager.getDocumentsById('db.recycle_company', requests[0].Company_id.toString());
                 console.log(company);
                 requests.forEach(i => {
                     i["Status"] = RequestStatus.find(t => t.id == i.RequestStatus).status;
                     i["ContributorMobileNo"] = createdUser ? createdUser.MobileNo : null;
-                    i["CompanyName"] = company && company.length > 0 ? company.CompanyName : null;
+                    i["CompanyName"] = company && company.length > 0 ? company[0].CompanyName : null;
                     i["Contributor"] = createdUser ? createdUser : null;
                 })
             }
@@ -184,6 +183,30 @@ export class RequestService {
         } catch (err) {
             console.error(err);
             response.ResponseMessage = "Assigning Failed...";
+        }
+        return response;
+    }
+
+    updateRequestStaus = async (login: string, requestId: string, status: number) => {
+        let response = { Success: false, NewRequestStatus: "" }
+        try {
+            await this.dbManager.connect();
+            let requests = await this.dbManager.getDocumentsById('db.requests', requestId);
+            if (requests && requests.length > 0) {
+                let assignRequest: WasteRequest = new WasteRequest();
+                assignRequest.ModifiedBy = login;
+                assignRequest.ModifiedDate = new Date();
+                assignRequest.RequestStatus = status;
+                await this.dbManager.updateDocumentsById('db.requests', requestId, assignRequest);
+                response.Success = true;
+                response.NewRequestStatus = RequestStatus.find(i => i.id == status).status;
+
+            } else {
+                response.NewRequestStatus = "Request not found";
+            }
+        } catch (err) {
+            console.error(err);
+            response.NewRequestStatus = "Status Change Failed";
         }
         return response;
     }

@@ -25,6 +25,7 @@ router.route('/request/distributor/getall/:login').get(RequestController.getRequ
 router.route('/request/company/getall/:login/:status').get(RequestController.getRequestsByCompany);
 router.route('/request/get/:id').get(RequestController.getRequestsById);
 router.route('/request/assign/:login/:id/:assignto').get(RequestController.assignToDistributor);
+router.route('/request/updatestatus/:login/:id/:status').get(RequestController.updateRequestStaus);
 //router.route('/movie').post(movieCtrl.postMovie);
 
 export default router;

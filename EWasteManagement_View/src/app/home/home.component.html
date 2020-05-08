@@ -11,12 +11,14 @@
                         [ngClass]="{'active': activeTab == 'Requests'}" (click)="activeTab = 'Requests'"><i
                             class="fas fa-retweet"></i><span>Requests</span></a>
                 </li>
-                <li class="nav-item" role="presentation"><a class="nav-link"><i
+                <li class="nav-item" role="presentation"><a class="nav-link"
+                        [ngClass]="{'active': activeTab == 'History'}" (click)="activeTab = 'History'"><i
                             class="fas fa-history"></i><span>History</span></a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link"
+                        [ngClass]="{'active': activeTab == 'Distributors'}" (click)="activeTab = 'Distributors'"><i
+                            class="far fa-user-circle"></i><span>Distributors</span></a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link"><i
                             class="fas fas fa-clipboard-list"></i><span>Dashboard</span></a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link"><i
-                            class="far fa-user-circle"></i><span>Distributors</span></a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link"><i
                             class="fas fa-gift"></i><span>Rewards</span></a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link"
@@ -53,7 +55,7 @@
                                         class="dropdown-item" role="presentation"><i
                                             class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Settings</a>
                                     <div class="dropdown-divider"></div><a class="dropdown-item" role="presentation"
-                                        href="#"><i
+                                        [routerLink]="''"><i
                                             class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a>
                                 </div>
                             </div>
@@ -64,6 +66,9 @@
             <div class="container-fluid">
                 <app-requests *ngIf="activeTab == 'Requests'"></app-requests>
                 <app-reports *ngIf="activeTab == 'Reports'"></app-reports>
+                <app-request-history *ngIf="activeTab == 'History'">
+                </app-request-history>
+                <app-distributors *ngIf="activeTab == 'Distributors'"></app-distributors>
             </div>
         </div>
         <footer class="bg-white sticky-footer">

@@ -22,6 +22,7 @@ import { CommonService } from './services/common.service';
 import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { RegisterComponent } from './register/register.component';
 import { NotificationModule } from '@progress/kendo-angular-notification';
+import { DistributorsComponent } from './distributors/distributors.component';
 
 
 
@@ -38,6 +39,7 @@ import { NotificationModule } from '@progress/kendo-angular-notification';
     ReportsComponent,
     RequestHistoryComponent,
     RegisterComponent,
+    DistributorsComponent,
   ],
   imports: [
     BrowserModule,

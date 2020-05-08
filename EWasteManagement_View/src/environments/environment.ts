@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  coreServiceURL: 'http://localhost:3600/'
+  coreServiceURL: 'https://e-waste-management-system.el.r.appspot.com/' //'http://localhost:3600/'
 };
 
 /*

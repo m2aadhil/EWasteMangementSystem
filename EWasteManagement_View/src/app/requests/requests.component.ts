@@ -4,6 +4,7 @@ import { HttpService } from '../services/https.service';
 import { CommonService } from '../services/common.service';
 import { UserModel } from '../models/user.model';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { NotificationService } from '@progress/kendo-angular-notification';
 
 @Component({
   selector: 'app-requests',
@@ -12,7 +13,8 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 })
 export class RequestsComponent implements OnInit {
 
-  constructor(private httpService: HttpService, private commonService: CommonService, private sanitizer: DomSanitizer) { }
+  constructor(private httpService: HttpService, private commonService: CommonService, private sanitizer: DomSanitizer,
+    private notificationService: NotificationService) { }
 
   private user: UserModel;
   isLoading: boolean = false;
@@ -67,13 +69,13 @@ export class RequestsComponent implements OnInit {
   }
 
   public filterChange(filter: any): void {
-    let distributor = this.distributors.filter((s) => (s.FirstName + ' ' + s.LastName).toLowerCase().indexOf(filter.toLowerCase()) !== -1);
+    let distributor = this.distributors.filter((s) => (s.FirstName.trim() + s.LastName.trim()).toLowerCase().indexOf(filter.trim().toLowerCase()) !== -1);
     this.listDistributors = distributor && distributor.length > 0 ? distributor.map(s => { return s.FirstName + ' ' + s.LastName }) : [];
 
   }
 
   public valueChange(value: any): void {
-    this.selectedDistributor = this.distributors.find((s) => (s.FirstName + ' ' + s.LastName) == value.toLowerCase());
+    this.selectedDistributor = this.distributors.find((s) => (s.FirstName + ' ' + s.LastName).toLowerCase() == value.toLowerCase());
   }
 
   private getPendingRequest = async () => {
@@ -119,6 +121,14 @@ export class RequestsComponent implements OnInit {
         this.isAssign = false
         this.isLoading = false;
         this.getPendingRequest();
+        this.notificationService.show({
+          content: `Request Assigned to the user ${loginName} successfully!`,
+          cssClass: 'button-notification',
+          animation: { type: 'slide', duration: 400 },
+          position: { horizontal: 'center', vertical: 'bottom' },
+          type: { style: 'success', icon: true },
+          closable: false
+        });
       }
     }).catch(err => {
       this.isLoading = false;
@@ -133,6 +143,14 @@ export class RequestsComponent implements OnInit {
       if (res) {
         console.log(res);
         this.isLoading = false;
+        this.notificationService.show({
+          content: `Request rejected successfully!`,
+          cssClass: 'button-notification',
+          animation: { type: 'slide', duration: 400 },
+          position: { horizontal: 'center', vertical: 'bottom' },
+          type: { style: 'success', icon: true },
+          closable: false
+        });
         this.getPendingRequest();
       }
     }).catch(err => {

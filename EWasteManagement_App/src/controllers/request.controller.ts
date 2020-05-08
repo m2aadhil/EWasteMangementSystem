@@ -33,3 +33,7 @@ export const getRequestsById = async (req: Request, res: Response) => {
 export const assignToDistributor = async (req: Request, res: Response) => {
     res.json(await requestService.assigenToDistributor(req.params.login, req.params.id, req.params.assignto));
 }
+
+export const updateRequestStaus = async (req: Request, res: Response) => {
+    res.json(await requestService.updateRequestStaus(req.params.login, req.params.id, Number(req.params.status)));
+}
