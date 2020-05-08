@@ -8,7 +8,6 @@ export class CommonService {
 
     constructor() {
         this.user = new UserModel();
-        this.user.LoginName = 'admin_m2aadhil';
     }
 
     setUser = (user: UserModel) => {
