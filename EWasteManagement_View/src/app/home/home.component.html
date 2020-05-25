@@ -17,9 +17,10 @@
                 <li class="nav-item" role="presentation"><a class="nav-link"
                         [ngClass]="{'active': activeTab == 'Distributors'}" (click)="activeTab = 'Distributors'"><i
                             class="far fa-user-circle"></i><span>Distributors</span></a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link"><i
-                            class="fas fas fa-clipboard-list"></i><span>Dashboard</span></a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link"><i
+                <li class="nav-item" role="presentation"><a class="nav-link"
+                    [ngClass]="{'active': activeTab == 'Sales Trends'}" (click)="activeTab = 'Sales Trends'"><i
+                            class="fas fas fa-clipboard-list"></i><span>Trends</span></a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" [ngClass]="{'active': activeTab == 'Rewards'}" (click)="activeTab = 'Rewards'"><i
                             class="fas fa-gift"></i><span>Rewards</span></a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link"
                         [ngClass]="{'active': activeTab == 'Reports'}" (click)="activeTab = 'Reports'"><i
@@ -68,7 +69,9 @@
                 <app-reports *ngIf="activeTab == 'Reports'"></app-reports>
                 <app-request-history *ngIf="activeTab == 'History'">
                 </app-request-history>
+                <app-awards *ngIf="activeTab == 'Rewards'"></app-awards>
                 <app-distributors *ngIf="activeTab == 'Distributors'"></app-distributors>
+                <app-forecast *ngIf="activeTab == 'Sales Trends'"></app-forecast>
             </div>
         </div>
         <footer class="bg-white sticky-footer">

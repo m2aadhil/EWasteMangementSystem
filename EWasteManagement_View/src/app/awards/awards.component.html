@@ -1,0 +1,132 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10">
+            <div class="card shadow mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h6 class="text-primary font-weight-bold m-0">Registered Shops</h6>
+                </div>
+                <div class="card-body" style="height:55vh !important;">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Reward Providers : </label>
+                        </div>
+                        <div class="col-md-8">
+                            <kendo-buttongroup class="meals" [selection]="'single'">
+                                <!-- (click)="selectedMeal(meal)" -->
+                                <button kendoButton style="margin: 5px !important" *ngFor="let provider of providers" [toggleable]="true" [selected]="provider.selected" (click)="getRewards(provider.id)" >
+                                    <img style="height: 10vh; width:20vh;" [src]="provider.icon">
+                                </button>
+                            </kendo-buttongroup>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 3vh;">
+                        <div class="col-md-12"></div>
+                    </div>
+                    <div class="row" style="height: 20vh;">
+                        <div class="col-md-2">
+                            <label>Rewards : </label>
+                        </div>
+                        <div class="col-md-6">
+                            <kendo-buttongroup style="width: 10vh !important;" class="meals" [selection]="'single'">
+                                <!-- (click)="selectedMeal(meal)" -->
+                                <button kendoButton style="margin: 5px !important"  *ngFor="let reward of rewards" [toggleable]="true" [selected]="reward.selected" (click)="selectReward(reward)" >
+                                    <div>
+                                        <img *ngIf="reward.RewardType == 'Cash'" style="height: 8vh; width:16vh;" src="https://www.seekpng.com/png/detail/332-3321956_mobile-wallets-cash-icon.png"> 
+                                        <img *ngIf="reward.RewardType == 'Voucher'" style="height: 8vh; width:16vh;" src="data:image/png;base64,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">
+                                        <h6 style="text-align: center;">
+                                            {{reward.RewardType}}
+                                        </h6><br>
+                                        <label>{{reward.Description}}</label>
+                                    </div>
+                                </button>
+                            </kendo-buttongroup>
+                        </div>
+                        <div class="col-md-2">
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+
+                        </div>
+                        <div class="col-md-2">
+                            <button kendoButton [disabled]="!reward" (click)="isAssign = true">Reward Contributor</button>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<kendo-dialog title="Liable Contributor" *ngIf="isAssign" (close)="isAssign = false" [minWidth]="250" [width]="320"
+    [height]="350">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <kendo-combobox style="width: 100%;" [data]="listContributors" [filterable]="true"
+                    (filterChange)="filterChange($event)" (valueChange)="valueChange($event)" [allowCustom]="false">
+                </kendo-combobox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                &nbsp;
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h5 class="small font-weight-bold">First Name :</h5>
+            </div>
+            <div class="col-md-6">
+                <h5 class="small">
+                    {{selectedContributor.FirstName}}
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h5 class="small font-weight-bold">Last Name :</h5>
+            </div>
+            <div class="col-md-6">
+                <h5 class="small">
+                    {{selectedContributor.LastName}}
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h5 class="small font-weight-bold">Contact No :</h5>
+            </div>
+            <div class="col-md-6">
+                <h5 class="small">
+                    {{selectedContributor.MobileNo}}
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h5 class="small font-weight-bold">Email :</h5>
+            </div>
+            <div class="col-md-6">
+                <h5 class="small"> {{selectedContributor.Email}}</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h5 class="small font-weight-bold">Contributed E-Wastes Count :</h5>
+            </div>
+            <div class="col-md-6">
+                <h5 class="small">{{selectedContributor.Count}}
+                </h5>
+            </div>
+        </div>
+
+    </div>
+    <kendo-dialog-actions>
+        <button kendoButton (click)="isAssign = false">Cancel</button>
+        <button kendoButton (click)="assignContributor(selectedContributor.LoginName)" primary="true">Offer Reward</button>
+    </kendo-dialog-actions>
+</kendo-dialog>

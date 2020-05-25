@@ -26,6 +26,12 @@ router.route('/request/company/getall/:login/:status').get(RequestController.get
 router.route('/request/get/:id').get(RequestController.getRequestsById);
 router.route('/request/assign/:login/:id/:assignto').get(RequestController.assignToDistributor);
 router.route('/request/updatestatus/:login/:id/:status').get(RequestController.updateRequestStaus);
+
+//rewards
+router.route('/rewards/get/:id').get(RequestController.getRewards);
+router.route('/rewards/providers/get').get(UserController.getRewardProviders);
+router.route('/rewards/history/:id').get(RequestController.getRewardHistory);
+router.route('/rewards/assing/:id/:contributor/:company').get(RequestController.assignReward);
 //router.route('/movie').post(movieCtrl.postMovie);
 
 export default router;

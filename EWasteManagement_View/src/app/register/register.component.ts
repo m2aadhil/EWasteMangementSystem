@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CompanyUser } from '../models/company-register';
 import { HttpService } from '../services/https.service';
 import { NotificationService } from '@progress/kendo-angular-notification';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,7 @@ export class RegisterComponent implements OnInit {
   user: CompanyUser = new CompanyUser();
   isLoading: boolean = false;
 
-  constructor(private httpService: HttpService, private notificationService: NotificationService) { }
+  constructor(private httpService: HttpService, private notificationService: NotificationService, private _router: Router) { }
 
   ngOnInit() {
   }
@@ -28,13 +29,14 @@ export class RegisterComponent implements OnInit {
       if (res) {
         if (res.Status == 'success') {
           this.notificationService.show({
-            content: 'Registration Successfull!',
+            content: 'Registration Successfull! Please login to continue.',
             cssClass: 'button-notification',
             animation: { type: 'slide', duration: 400 },
             position: { horizontal: 'center', vertical: 'bottom' },
             type: { style: 'success', icon: true },
             closable: false
           });
+          this._router.navigateByUrl("");
         } else if (res.Status == 'duplicate') {
           this.notificationService.show({
             content: 'Login name already exists!',

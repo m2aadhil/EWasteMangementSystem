@@ -3,6 +3,7 @@ import { WasteRequest } from "../database/tables/requests/request";
 import { UserService } from "./user.service";
 import { RequestStatus } from "../models/constants";
 import { request } from "express";
+import { WasteReward } from "../database/tables/rewards/reward";
 
 export class RequestService {
 
@@ -183,6 +184,52 @@ export class RequestService {
         } catch (err) {
             console.error(err);
             response.ResponseMessage = "Assigning Failed...";
+        }
+        return response;
+    }
+
+    getRewards = async(id:string) =>{
+        let response;
+        try {
+            await this.dbManager.connect();
+            response = await this.dbManager.getDocuments('db.rewards', {Givenby: id, Ownedby: ''});
+            //response = await this.dbManager.getAllDocuments('db.rewards');
+            console.log(response);
+        } catch (e) {
+            console.error(e);
+        } finally {
+
+        }
+        return response;
+    }
+
+    getRewardHistory = async(companyId:string) =>{
+        let response;
+        try {
+            await this.dbManager.connect();
+            response = await this.dbManager.getDocuments('db.rewards', {Assignedto: companyId});
+            //response = await this.dbManager.getAllDocuments('db.rewards');
+            console.log(response);
+        } catch (e) {
+            console.error(e);
+        } finally {
+
+        }
+        return response;
+    }
+
+    asignedRewards = async(rewardId:string, contributorId:string, companyId:string) =>{
+        let response;
+        try {
+            await this.dbManager.connect();
+            let reward:WasteReward = (await this.dbManager.getDocumentsById('db.rewards', rewardId))[0];
+            reward.Assignedto = companyId;
+            reward.Ownedby = contributorId;
+            await this.dbManager.insertDocument('db.rewards', reward);
+        } catch (e) {
+            console.error(e);
+        } finally {
+
         }
         return response;
     }

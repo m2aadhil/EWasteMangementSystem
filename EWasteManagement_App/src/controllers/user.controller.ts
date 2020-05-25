@@ -56,3 +56,7 @@ export const addCompanyRating = async (req: Request, res: Response) => {
 export const getCompanyRating = async (req: Request, res: Response) => {
     res.json(await userService.getCompanyRating(req.params.login, req.params.company));
 }
+
+export const getRewardProviders = async (req: Request, res: Response) => {
+    res.json(await userService.getRewardProviders());
+}

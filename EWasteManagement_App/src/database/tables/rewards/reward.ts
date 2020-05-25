@@ -10,5 +10,5 @@ export class WasteReward extends BaseModel {
     Assignedto: string;
     RewardDate: Date;
     ExpiryDate: Date;
-
+    IsActive: boolean;
 }

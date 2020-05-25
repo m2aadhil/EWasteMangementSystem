@@ -215,6 +215,19 @@ export class UserService {
         return response;
     }
 
+    getRewardProviders = async() =>{
+        let response;
+        try {
+            await this.dbManager.connect();
+            response = await this.dbManager.getAllDocuments('db.reward_provider');
+            console.log(response);
+        } catch (e) {
+            console.error(e);
+        } finally {
+
+        }
+        return response;
+    }
 
 
     private sendResetPasswordEmail = async (user, resetString: string) => {

@@ -7,4 +7,5 @@ export class RewardProvider extends BaseModel {
     AddressLine1: string;
     AddressLine2: string;
     City: string;
+    IsActive: boolean;
 }

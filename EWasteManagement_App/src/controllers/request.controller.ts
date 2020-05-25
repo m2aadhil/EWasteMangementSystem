@@ -37,3 +37,15 @@ export const assignToDistributor = async (req: Request, res: Response) => {
 export const updateRequestStaus = async (req: Request, res: Response) => {
     res.json(await requestService.updateRequestStaus(req.params.login, req.params.id, Number(req.params.status)));
 }
+
+export const getRewards = async (req: Request, res: Response) => {
+    res.json(await requestService.getRewards(req.params.id));
+}
+
+export const getRewardHistory = async (req: Request, res: Response) => {
+    res.json(await requestService.getRewardHistory(req.params.id));
+}
+
+export const assignReward = async (req: Request, res: Response) => {
+    res.json(await requestService.asignedRewards(req.params.id, req.params.contributor, req.params.company));
+}

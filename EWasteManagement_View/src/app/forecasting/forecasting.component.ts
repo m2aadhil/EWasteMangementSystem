@@ -1,33 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { HttpService } from '../services/https.service';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { CommonService } from '../services/common.service';
 import { UserModel } from '../models/user.model';
 
+declare var ocpu;
+declare var $;
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.less']
+  selector: 'app-forecast',
+  templateUrl: './forecasting.component.html',
+  styleUrls: ['./forecasting.component.less']
 })
-export class HomeComponent implements OnInit {
+export class ForecastingComponent implements OnInit, AfterViewInit {
 
-  activeTab: string = 'Requests';
-  user: UserModel;
   ngOnInit() {
-
+    console.log($);
   }
 
 
   constructor(private httpService: HttpService, private _router: Router, private commonService: CommonService
   ) {
-    this.user = this.commonService.getUser();
-    this.user.LoginName = 'm2aadhil';
-    if (!this.user.LoginName) {
-      this._router.navigate(['']);
-    }
 
   }
+    ngAfterViewInit(): void {
+
+    }
 
 }
