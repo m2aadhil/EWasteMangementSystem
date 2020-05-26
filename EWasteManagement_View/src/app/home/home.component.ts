@@ -23,7 +23,6 @@ export class HomeComponent implements OnInit {
   constructor(private httpService: HttpService, private _router: Router, private commonService: CommonService
   ) {
     this.user = this.commonService.getUser();
-    this.user.LoginName = 'm2aadhil';
     if (!this.user.LoginName) {
       this._router.navigate(['']);
     }
