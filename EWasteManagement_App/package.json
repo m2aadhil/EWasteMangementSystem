@@ -36,7 +36,7 @@
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "mongodb": "^3.5.5",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^3.1.1",
     "nodemailer": "^6.4.6",
     "request-promise": "^4.2.5",
     "typescript": "^3.0.1"
